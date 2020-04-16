@@ -1,1 +1,1 @@
-# ddd-cinema-reservation
+# Workshop: From DDD/BDD to Outside-in TDD
