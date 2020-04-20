@@ -1,4 +1,5 @@
 ﻿using CinemaReservations.Tests.StubMovieScreening;
+using External.AuditoriumLayout;
 using NFluent;
 using NUnit.Framework;
 
@@ -13,13 +14,13 @@ namespace CinemaReservations.Tests
             const string showId = "1";
             const int partyRequested = 1;
 
-            IMovieScreeningRepsitory repository =  new StubMovieScreeningRepository();
-            MovieScreening screening = repository.FindMovieScreeningById(showId);
+            IMovieScreeningRepository repository =  new StubMovieScreeningRepository(new StubAuditoriumRepository());
+            TicketBooth ticketBooth = new TicketBooth(repository);
 
-            var seatsReserved = screening.reserveSeats(new ReserveSeats(showId, partyRequested));
+            var seatsAllocated = ticketBooth.AllocateSeats(new AllocateSeats(showId, partyRequested));
 
-            Check.That(seatsReserved.ReservedSeats).HasSize(1);
-            Check.That(seatsReserved.ReservedSeats[0].ToString()).IsEqualTo("A3");
+            Check.That(seatsAllocated.ReservedSeats).HasSize(1);
+            Check.That(seatsAllocated.ReservedSeats[0].ToString()).IsEqualTo("A3");
         }
 
         [Test]
@@ -28,13 +29,13 @@ namespace CinemaReservations.Tests
             const string showId = "5";
             const int partyRequested = 1;
 
-            IMovieScreeningRepsitory repository =  new StubMovieScreeningRepository();
-            MovieScreening screening = repository.FindMovieScreeningById(showId);
+            IMovieScreeningRepository repository =  new StubMovieScreeningRepository(new StubAuditoriumRepository());
+            TicketBooth ticketBooth = new TicketBooth(repository);
 
-            var seatsReserved = screening.reserveSeats(new ReserveSeats(showId, partyRequested));
+            var seatsAllocated = ticketBooth.AllocateSeats(new AllocateSeats(showId, partyRequested));
 
-            Check.That(seatsReserved.ReservedSeats).HasSize(0);
-            Check.That(seatsReserved).IsInstanceOf<ReservationNotAvailable>();
+            Check.That(seatsAllocated.ReservedSeats).HasSize(0);
+            Check.That(seatsAllocated).IsInstanceOf<NoPossibleAllocationsFound>();
         }
 
     }

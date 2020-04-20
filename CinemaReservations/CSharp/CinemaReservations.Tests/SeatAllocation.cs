@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 
 namespace CinemaReservations.Tests {
-    public class Reservation {
+    public class SeatAllocation {
 
         public int PartyRequested { get; }
-        public List<Seat> ReservedSeats { get; set; } = new List<Seat>();
-        public bool IsFulfilled => ReservedSeats.Count == PartyRequested;
-        public Reservation(int partyRequested)
+        public List<Seat> AllocatedSeats { get; set; } = new List<Seat>();
+        public bool IsFulfilled => AllocatedSeats.Count == PartyRequested;
+        public SeatAllocation(int partyRequested)
         {
             this.PartyRequested = partyRequested;
         }
         public void AddSeat(Seat seat)
         {
             seat.UpdateAvailability(SeatAvailability.Reserved);
-            ReservedSeats.Add(seat);
+            AllocatedSeats.Add(seat);
         }
     }
 }

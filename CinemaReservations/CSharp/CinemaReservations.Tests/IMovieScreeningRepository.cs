@@ -1,6 +1,6 @@
 namespace CinemaReservations.Tests 
 {
-    interface IMovieScreeningRepsitory {
+    public interface IMovieScreeningRepository {
         MovieScreening FindMovieScreeningById(string screeningId);
     }
 }

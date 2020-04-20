@@ -8,9 +8,9 @@ namespace CinemaReservations.Tests
         public MovieScreening(Dictionary<String, Row> rows) {
             Rows = rows;
         }
-        public SeatsReserved reserveSeats(ReserveSeats reserveSeats)
+        public SeatsAllocated allocateSeats(AllocateSeats allocateSeats)
         {
-            var reservation = new Reservation(reserveSeats.PartyRequested);
+            var allocation = new SeatAllocation(allocateSeats.PartyRequested);
 
             foreach (var row in Rows)
             {
@@ -18,15 +18,15 @@ namespace CinemaReservations.Tests
                 {
                     if (seat.IsAvailable)
                     {
-                        reservation.AddSeat(seat);
+                        allocation.AddSeat(seat);
 
-                        if(reservation.IsFulfilled) {
-                            return new SeatsReserved(reserveSeats.PartyRequested, reservation.ReservedSeats);
+                        if(allocation.IsFulfilled) {
+                            return new SeatsAllocated(allocateSeats.PartyRequested, allocation.AllocatedSeats);
                         }
                     }
                 }
             }
-            return new ReservationNotAvailable(reserveSeats.PartyRequested);;
+            return new NoPossibleAllocationsFound(allocateSeats.PartyRequested);;
         }
     }
 }

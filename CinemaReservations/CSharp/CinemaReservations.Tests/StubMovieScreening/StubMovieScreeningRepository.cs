@@ -6,12 +6,14 @@ using External.AuditoriumLayout;
 
 namespace CinemaReservations.Tests.StubMovieScreening
 {
-    public class StubMovieScreeningRepository : IMovieScreeningRepsitory
+    public class StubMovieScreeningRepository : IMovieScreeningRepository
     {   
-        private readonly Dictionary<string, AuditoriumDto> _auditoriumRepository = new Dictionary<string, AuditoriumDto>();  
+        private IAuditoriumRepository _auditoriumRepository;
         private readonly Dictionary<string, ReservedSeatsDto> _reservedSeatsRepository = new Dictionary<string, ReservedSeatsDto>();
-        public StubMovieScreeningRepository()
+        public StubMovieScreeningRepository(IAuditoriumRepository auditoriumRepository)
         {
+            _auditoriumRepository = auditoriumRepository;
+
             var directoryName = $"{GetExecutingAssemblyDirectoryFullPath()}\\AuditoriumLayouts\\";
             
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
@@ -21,13 +23,6 @@ namespace CinemaReservations.Tests.StubMovieScreening
             
             foreach (var fileFullName in Directory.EnumerateFiles($"{directoryName}"))
             {
-                if (fileFullName.Contains("_theater.json"))
-                {
-                    var fileName = Path.GetFileName(fileFullName);
-                    var eventId = Path.GetFileName(fileName.Split("-")[0]);
-                    _auditoriumRepository[eventId] = JsonFile.ReadFromJsonFile<AuditoriumDto>(fileFullName);
-                }
-
                 if (fileFullName.Contains("_booked_seats.json"))
                 {
                     var fileName = Path.GetFileName(fileFullName);
@@ -40,13 +35,9 @@ namespace CinemaReservations.Tests.StubMovieScreening
 
         public MovieScreening FindMovieScreeningById(string screeningId)
         {
-            if(_auditoriumRepository.ContainsKey(screeningId) == false || _reservedSeatsRepository.ContainsKey(screeningId) == false) {
-                throw new System.Exception("Could not find a movie screening with id " + screeningId);
-            }
-
-            AuditoriumDto auditoriumDto = _auditoriumRepository[screeningId];
+            AuditoriumDto auditoriumDto = _auditoriumRepository.FindAuditoriumForScreeningId(screeningId);
             ReservedSeatsDto reservedSeatsDto = _reservedSeatsRepository[screeningId];
-            
+        
             var rows = new Dictionary<string, Row>();
             foreach (var rowDto in auditoriumDto.Rows)
             {
