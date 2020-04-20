@@ -1,4 +1,4 @@
-﻿namespace CinemaReservations.Tests.StubMovieScreening
+﻿namespace External.AuditoriumLayout
 {
     public class SeatDto
     {

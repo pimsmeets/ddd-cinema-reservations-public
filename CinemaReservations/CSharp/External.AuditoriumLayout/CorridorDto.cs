@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CinemaReservations.Tests.StubMovieScreening
+namespace External.AuditoriumLayout
 {
     public class CorridorDto
     {

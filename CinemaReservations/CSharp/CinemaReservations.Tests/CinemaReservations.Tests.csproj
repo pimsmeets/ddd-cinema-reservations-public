@@ -214,4 +214,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\External.AuditoriumLayout\External.AuditoriumLayout.csproj" />
+  </ItemGroup>
+
 </Project>
