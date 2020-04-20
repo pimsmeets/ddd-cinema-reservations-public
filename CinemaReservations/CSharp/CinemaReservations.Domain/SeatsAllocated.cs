@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
-namespace CinemaReservations.Tests {
-    public class SeatsAllocated 
+namespace CinemaReservations.Domain {
+    public class SeatsAllocated
     {
         public int PartyRequested { get; }
         public List<Seat> ReservedSeats { get; }

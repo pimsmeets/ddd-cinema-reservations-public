@@ -215,6 +215,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CinemaReservations.Domain\CinemaReservations.Domain.csproj" />
     <ProjectReference Include="..\External.AuditoriumLayout\External.AuditoriumLayout.csproj" />
   </ItemGroup>
 

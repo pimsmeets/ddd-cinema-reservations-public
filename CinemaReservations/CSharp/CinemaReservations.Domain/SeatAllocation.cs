@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CinemaReservations.Tests {
+namespace CinemaReservations.Domain {
     public class SeatAllocation {
 
         public int PartyRequested { get; }

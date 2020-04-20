@@ -1,6 +1,4 @@
-using System;
-
-namespace CinemaReservations.Tests {
+namespace CinemaReservations.Domain {
 
     public class Seat {
         public string RowName { get; }
