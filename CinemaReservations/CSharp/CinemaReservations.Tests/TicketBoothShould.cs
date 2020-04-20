@@ -1,4 +1,5 @@
 ﻿using CinemaReservations.Tests.StubMovieScreening;
+using CinemaReservations.Domain;
 using External.AuditoriumLayout;
 using NFluent;
 using NUnit.Framework;

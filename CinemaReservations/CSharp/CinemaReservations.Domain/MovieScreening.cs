@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace CinemaReservations.Tests 
-{    
+namespace CinemaReservations.Domain
+{
     public class MovieScreening  {
         public readonly Dictionary<string, Row> Rows;
         public MovieScreening(Dictionary<String, Row> rows) {

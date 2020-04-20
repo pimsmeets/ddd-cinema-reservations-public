@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using CinemaReservations.Domain;
 using External.AuditoriumLayout;
 
 namespace CinemaReservations.Tests.StubMovieScreening
 {
     public class StubMovieScreeningRepository : IMovieScreeningRepository
-    {   
+    {
         private IAuditoriumRepository _auditoriumRepository;
         private readonly Dictionary<string, ReservedSeatsDto> _reservedSeatsRepository = new Dictionary<string, ReservedSeatsDto>();
         public StubMovieScreeningRepository(IAuditoriumRepository auditoriumRepository)
@@ -15,12 +16,12 @@ namespace CinemaReservations.Tests.StubMovieScreening
             _auditoriumRepository = auditoriumRepository;
 
             var directoryName = $"{GetExecutingAssemblyDirectoryFullPath()}\\AuditoriumLayouts\\";
-            
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 directoryName = $"{GetExecutingAssemblyDirectoryFullPath()}/AuditoriumLayouts/";
             }
-            
+
             foreach (var fileFullName in Directory.EnumerateFiles($"{directoryName}"))
             {
                 if (fileFullName.Contains("_booked_seats.json"))
@@ -37,7 +38,7 @@ namespace CinemaReservations.Tests.StubMovieScreening
         {
             AuditoriumDto auditoriumDto = _auditoriumRepository.FindAuditoriumForScreeningId(screeningId);
             ReservedSeatsDto reservedSeatsDto = _reservedSeatsRepository[screeningId];
-        
+
             var rows = new Dictionary<string, Row>();
             foreach (var rowDto in auditoriumDto.Rows)
             {

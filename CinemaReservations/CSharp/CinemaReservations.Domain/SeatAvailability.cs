@@ -1,4 +1,4 @@
-namespace CinemaReservations.Tests {
+namespace CinemaReservations.Domain {
     public enum SeatAvailability
     {
         Reserved,

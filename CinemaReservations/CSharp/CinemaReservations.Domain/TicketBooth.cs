@@ -1,4 +1,4 @@
-namespace CinemaReservations.Tests
+namespace CinemaReservations.Domain
 {
     public class TicketBooth {
         private IMovieScreeningRepository _screeningRepository;
@@ -10,16 +10,16 @@ namespace CinemaReservations.Tests
 
         public SeatsAllocated AllocateSeats(AllocateSeats allocateSeats)
         {
-            try 
+            try
             {
                 MovieScreening movieScreening = _screeningRepository.FindMovieScreeningById(allocateSeats.ShowId);
                 return movieScreening.allocateSeats(allocateSeats);
-            } 
+            }
             catch
             {
                 return new NoPossibleAllocationsFound(allocateSeats.PartyRequested);
             }
         }
-        
+
     }
 }
