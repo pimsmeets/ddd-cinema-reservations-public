@@ -14,13 +14,11 @@ namespace CinemaReservations.Tests
             const string showId = "1";
             const int partyRequested = 1;
 
-            IMovieScreeningRepository repository =  new StubMovieScreeningRepository(new StubAuditoriumRepository());
-            TicketBooth ticketBooth = new TicketBooth(repository);
-
-            var seatsAllocated = ticketBooth.AllocateSeats(new AllocateSeats(showId, partyRequested));
-
-            Check.That(seatsAllocated.ReservedSeats).HasSize(1);
-            Check.That(seatsAllocated.ReservedSeats[0].ToString()).IsEqualTo("A3");
+            // Leaving this here as reference on how to use the provided testing frameworks.
+            // Feel free to use your personal favorite
+            
+            // Check.That(XXX).HasSize(1);
+            // Check.That(XXX).IsEqualTo("A3");
         }
 
         [Test]
@@ -28,14 +26,6 @@ namespace CinemaReservations.Tests
         {
             const string showId = "5";
             const int partyRequested = 1;
-
-            IMovieScreeningRepository repository =  new StubMovieScreeningRepository(new StubAuditoriumRepository());
-            TicketBooth ticketBooth = new TicketBooth(repository);
-
-            var seatsAllocated = ticketBooth.AllocateSeats(new AllocateSeats(showId, partyRequested));
-
-            Check.That(seatsAllocated.ReservedSeats).HasSize(0);
-            Check.That(seatsAllocated).IsInstanceOf<NoPossibleAllocationsFound>();
         }
 
     }
