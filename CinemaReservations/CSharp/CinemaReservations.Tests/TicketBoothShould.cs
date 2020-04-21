@@ -39,5 +39,36 @@ namespace CinemaReservations.Tests
             Check.That(seatsAllocated).IsInstanceOf<NoPossibleAllocationsFound>();
         }
 
+        [Test]
+        public void Reserve_first_possibility_for_multiple_seats_when_available()
+        {
+            const string showId = "3";
+            const int partyRequested = 2;
+
+            IMovieScreeningRepository repository =  new StubMovieScreeningRepository(new StubAuditoriumRepository());
+            TicketBooth ticketBooth = new TicketBooth(repository);
+
+            var seatsAllocated = ticketBooth.AllocateSeats(new AllocateSeats(showId, partyRequested));
+
+            Check.That(seatsAllocated.ReservedSeats).HasSize(2);
+            Check.That(seatsAllocated.ReservedSeats[0].ToString()).IsEqualTo("A6");
+            Check.That(seatsAllocated.ReservedSeats[1].ToString()).IsEqualTo("A7");
+        }
+
+        [Test]
+        public void Return_TooManyTicketsRequested_when_9_tickets_are_requested()
+        {
+            const string showId = "5";
+            const int partyRequested = 9;
+
+            IMovieScreeningRepository repository =  new StubMovieScreeningRepository(new StubAuditoriumRepository());
+            TicketBooth ticketBooth = new TicketBooth(repository);
+
+            var seatsAllocated = ticketBooth.AllocateSeats(new AllocateSeats(showId, partyRequested));
+
+            Check.That(seatsAllocated.ReservedSeats).HasSize(0);
+            Check.That(seatsAllocated).IsInstanceOf<TooManyTicketsRequested>();
+        }
+
     }
 }
