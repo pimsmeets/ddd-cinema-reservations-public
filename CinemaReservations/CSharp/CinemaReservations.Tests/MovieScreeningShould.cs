@@ -23,7 +23,7 @@ namespace CinemaReservations.Tests
     }
 
     [Test]
-    public void Allocation_fails_when_not_enough_seats_available()
+    public void Allocate_nothing_when_not_enough_seats_available()
     {
       const string showId = "1";
       const int partyRequested = 5;
