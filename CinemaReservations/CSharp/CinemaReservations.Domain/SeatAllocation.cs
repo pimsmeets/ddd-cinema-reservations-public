@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CinemaReservations.Domain {
@@ -12,8 +13,10 @@ namespace CinemaReservations.Domain {
         }
         public void AddSeat(Seat seat)
         {
-            seat.UpdateAvailability(SeatAvailability.Reserved);
-            AllocatedSeats.Add(seat);
+          /* This function updates the value object AllocatedSeats
+           * It adds 'seat' and updates the status of the seat
+           */
+          throw new NotImplementedException();
         }
     }
 }
