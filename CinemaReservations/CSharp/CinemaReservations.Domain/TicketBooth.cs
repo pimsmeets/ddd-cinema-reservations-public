@@ -1,3 +1,5 @@
+using System;
+
 namespace CinemaReservations.Domain
 {
     public class TicketBooth {
@@ -10,15 +12,14 @@ namespace CinemaReservations.Domain
 
         public SeatsAllocated AllocateSeats(AllocateSeats allocateSeats)
         {
-            try
-            {
-                MovieScreening movieScreening = _screeningRepository.FindMovieScreeningById(allocateSeats.ShowId);
-                return movieScreening.allocateSeats(allocateSeats);
-            }
-            catch
-            {
-                return new NoPossibleAllocationsFound(allocateSeats.PartyRequested);
-            }
+            /* TicketBooth is a service that can be used to allocate sets.
+             * Currently there are two possible outcomes:
+             * - We return a SeatsAllocated object if the allocation is successful
+             * - We return a NoPossibleAllocationsFound object if the allocation is unsuccessful
+             *
+             * Hint: look at the model in /docs/
+             */
+            throw new NotImplementedException();
         }
 
     }
