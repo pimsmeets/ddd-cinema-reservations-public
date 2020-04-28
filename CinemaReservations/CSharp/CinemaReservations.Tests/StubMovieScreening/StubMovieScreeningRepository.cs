@@ -39,24 +39,18 @@ namespace CinemaReservations.Tests.StubMovieScreening
             AuditoriumDto auditoriumDto = _auditoriumRepository.FindAuditoriumForScreeningId(screeningId);
             ReservedSeatsDto reservedSeatsDto = _reservedSeatsRepository[screeningId];
 
+            /*In our model a MovieScreening contains rows, which contains seats.
+             The status of each seat is determined by the SeatAvailability enum.
+
+             We are relying on the auditoriumRepository to provide us with a map of the seats for a certain screening,
+             and on the reservedSeatsRepository to determine the status.
+
+             Implement the necessary logic to populate and return the value object rows
+             */
+
             var rows = new Dictionary<string, Row>();
-            foreach (var rowDto in auditoriumDto.Rows)
-            {
-                foreach (var seatDto in rowDto.Value)
-                {
-                    var rowName = ExtractRowName(seatDto.Name);
-                    var number = ExtractNumber(seatDto.Name);
 
-                    var isReserved = reservedSeatsDto.ReservedSeats.Contains(seatDto.Name);
-
-                    if (!rows.ContainsKey(rowName))
-                    {
-                        rows[rowName] = new Row();
-                    }
-
-                    rows[rowName].Seats.Add(new Seat(rowName, number, isReserved ? SeatAvailability.Reserved : SeatAvailability.Available));
-                }
-            }
+            // Todo: implement this
 
             return new MovieScreening(rows);
         }
