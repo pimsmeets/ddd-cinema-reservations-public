@@ -10,23 +10,21 @@ namespace CinemaReservations.Domain
         }
         public SeatsAllocated allocateSeats(AllocateSeats allocateSeats)
         {
-            var allocation = new SeatAllocation(allocateSeats.PartyRequested);
+          var allocation = new SeatAllocation(allocateSeats.PartyRequested);
 
-            foreach (var row in Rows)
-            {
-                foreach (Seat seat in row.Value.Seats)
-                {
-                    if (seat.IsAvailable)
-                    {
-                        allocation.AddSeat(seat);
+          /*
+           * allocateSeats is called by TicketBooth, it's function is to:
+           * - Iterate through all rows for a certain movie
+           * - Iterate through each seat in those rows
+           * - Check if the seats are available and assign the seats to the allocation if they are
+           *
+           * Possible return values:
+           * - SeatsAllocated object
+           * - NoPossibleAllocationsFound object
+           */
+          
+          throw new NotImplementedException();
 
-                        if(allocation.IsFulfilled) {
-                            return new SeatsAllocated(allocateSeats.PartyRequested, allocation.AllocatedSeats);
-                        }
-                    }
-                }
-            }
-            return new NoPossibleAllocationsFound(allocateSeats.PartyRequested);;
         }
     }
 }
