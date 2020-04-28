@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -51,7 +52,8 @@ namespace CinemaReservations.Tests.StubMovieScreening
             var rows = new Dictionary<string, Row>();
 
             // Todo: implement this
-
+            throw new NotImplementedException();
+            
             return new MovieScreening(rows);
         }
 
