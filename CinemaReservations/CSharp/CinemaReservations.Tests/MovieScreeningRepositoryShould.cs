@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace CinemaReservations.Tests
 {
   [TestFixture]
-  public class MovieScreeningShould
+  public class MovieScreeningRepositoryShould
   {
     [Test]
     public void Return_seatmap_for_specific_screening()
